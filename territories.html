@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Territories | The Nekoropolis</title>
+  <meta name="description" content="Explore the Nekoropolis: the Sunthrone, the Proving Ring, Hearthfire Hall and more, with a map and visitor's guide.">
+  <meta name="theme-color" content="#140d0b">
+  <link rel="icon" href="favicon.ico" sizes="48x48">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="preload" href="fonts/grenze-gotisch-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/menu.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-bar">
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav" hidden>
+        <img src="images/icon-menu-claws.svg" alt="" width="32" height="32">
+        <span class="visually-hidden">Menu</span>
+      </button>
+      <a class="site-logo" href="index.html"><img src="images/logo-nekoropolis.svg" alt="The Nekoropolis – home" width="360" height="100"></a>
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <ul class="nav-list">
+          <li><a href="denizens.html">Denizens</a></li>
+          <li><a href="territories.html" aria-current="page">Territories</a></li>
+          <li><a href="https://tobiasvyseri.com/Aviaria/avianchess.html">The Great Game<span class="visually-hidden"> (external site)</span></a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="hero">
+      <img class="hero-wordmark" src="images/logo-nekoropolis.svg" alt="" width="360" height="100">
+      <img class="hero-character" src="images/hero-character.webp" srcset="images/hero-character.webp 800w, images/hero-character-1600.webp 1600w" sizes="(min-width: 48em) 20rem, 60vw" alt="Placeholder art: a maned, crowned cat warrior in a red tunic, standing in for a Nekoro champion" width="800" height="1200">
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section" aria-labelledby="territories-heading">
+      <h1 id="territories-heading">Territories of the Nekoropolis</h1>
+      <hr class="divider">
+      <p class="center">Our city climbs from the river to the red cliffs. Here is where to go, and how not to embarrass yourself once you get there.</p>
+      <figure class="map-figure">
+        <img src="images/map-placeholder.svg" alt="Placeholder map of the Nekoropolis. In the north, Scratchstone Cliffs on the left and the Sunthrone cliff-hall on the right. Below them, the Shrine of the Sun-Eye spire in the centre, the Kittenfold to the west and Hearthfire Hall to the east. The round Proving Ring sits at the centre of the city. The Fang River crosses from west to east, with Fishgate Docks on its eastern bank. South of the river are the Ember Forge and the grassy Sunning Steppes, and the Featherwall runs along the southern border toward Aviaria." width="1200" height="800">
+        <figcaption>Placeholder map. Final illustrated map coming soon. <a href="images/map-placeholder.svg">View the map full size</a>.</figcaption>
+      </figure>
+      <h2 class="visually-hidden">Places on the map</h2>
+      <ul class="place-list">
+        <li><a href="#sunthrone">The Sunthrone</a></li>
+        <li><a href="#proving-ring">The Proving Ring</a></li>
+        <li><a href="#sun-shrine">The Shrine of the Sun-Eye</a></li>
+        <li><a href="#hearthfire-hall">Hearthfire Hall</a></li>
+        <li><a href="#kittenfold">The Kittenfold</a></li>
+        <li><a href="#scratchstone-cliffs">Scratchstone Cliffs</a></li>
+        <li><a href="#sunning-steppes">The Sunning Steppes</a></li>
+        <li><a href="#ember-forge">The Ember Forge</a></li>
+        <li><a href="#fishgate-docks">Fishgate Docks</a></li>
+        <li><a href="#featherwall">The Featherwall</a></li>
+      </ul>
+    </section>
+
+    <section class="section" aria-labelledby="places-heading">
+      <h2 id="places-heading" class="section-title">A Visitor's Guide</h2>
+      <div class="table-scroll" tabindex="0" role="region" aria-labelledby="places-caption">
+        <table>
+          <caption id="places-caption">Places of Note</caption>
+          <thead>
+            <tr>
+              <th scope="col">Place</th>
+              <th scope="col">What happens there</th>
+              <th scope="col">Visitor's tip</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr id="sunthrone">
+            <th scope="row">The Sunthrone</th>
+            <td>The great hall of the King, carved into a cliff of red rock. Petitions are heard at noon, judgements at dusk.</td>
+            <td>Bow to the throne, not the king. He prefers it that way.</td>
+          </tr>
+          <tr id="proving-ring">
+            <th scope="row">The Proving Ring</th>
+            <td>A sand arena at the heart of the city. Duels, trials of rank and the loudest festivals in the land.</td>
+            <td>Watchers cheer for both fighters. Booing a loser is the only real foul.</td>
+          </tr>
+          <tr id="sun-shrine">
+            <th scope="row">The Shrine of the Sun-Eye</th>
+            <td>The High Seer's temple: a stone spire capped in gold that catches the first light.</td>
+            <td>Come at dawn. Ask one question. Expect a riddle back.</td>
+          </tr>
+          <tr id="hearthfire-hall">
+            <th scope="row">Hearthfire Hall</th>
+            <td>The feast hall that never closes. Guests eat first, always.</td>
+            <td>Claws sheathed at the hearth. Arguments wait until the plates are empty.</td>
+          </tr>
+          <tr id="kittenfold">
+            <th scope="row">The Kittenfold</th>
+            <td>Where young Nekoro are raised together and taught to climb, spar and boast properly.</td>
+            <td>Visitors are welcome. Expect to be climbed.</td>
+          </tr>
+          <tr id="scratchstone-cliffs">
+            <th scope="row">Scratchstone Cliffs</th>
+            <td>Claw-scarred climbing cliffs where warriors train their grip and nerve.</td>
+            <td>Add your own mark low on the rock. The high marks belong to champions.</td>
+          </tr>
+          <tr id="sunning-steppes">
+            <th scope="row">The Sunning Steppes</th>
+            <td>Warm golden grassland for the dawn hunt and the sacred afternoon nap.</td>
+            <td>Never wake a napper. Find your own patch of sun.</td>
+          </tr>
+          <tr id="ember-forge">
+            <th scope="row">The Ember Forge</th>
+            <td>The smithy district. Our library is our weapons, and the stories told about each one.</td>
+            <td>Ask any blade’s name and you will hear its whole history.</td>
+          </tr>
+          <tr id="fishgate-docks">
+            <th scope="row">Fishgate Docks</th>
+            <td>The river market on the Fang River. The busiest place in the city at dawn.</td>
+            <td>Arrive before sunrise for the best trout.</td>
+          </tr>
+          <tr id="featherwall">
+            <th scope="row">The Featherwall</th>
+            <td>The neutral border with Aviaria, where Nekoro and Avianis meet to play the Great Game instead of going to war.</td>
+            <td>Win loudly, lose honestly, and shake the Feathered by the wingtip after.</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="video-heading">
+      <h2 id="video-heading" class="section-title">Training in the Proving Ring</h2>
+      <figure class="video-figure">
+        <video controls preload="metadata" width="1280" height="720" poster="video/proving-ring-poster.webp">
+          <source src="video/proving-ring.webm" type="video/webm">
+          <source src="video/proving-ring.mp4" type="video/mp4">
+          <track kind="captions" src="video/proving-ring-captions.vtt" srclang="en" label="English" default>
+          <p>Your browser can't play this video. <a href="video/proving-ring.mp4">Download the MP4</a> instead.</p>
+        </video>
+        <figcaption>Two young recruits spar on the sand. No sound. (Placeholder animation; a real clip is on its way.)</figcaption>
+      </figure>
+    </section>
+
+    <section class="section" aria-labelledby="highlights-heading">
+      <h2 id="highlights-heading" class="section-title">Do Not Miss</h2>
+      <div class="highlights">
+        <section class="highlight" aria-labelledby="hl-ring">
+          <h3 id="hl-ring">The Proving Ring</h3>
+          <p>Every quarrel in the city ends here, one way or another. King Rhazan won his crown on this sand, and any Nekoro may challenge for rank on festival days. Visitors may challenge too. Visitors usually lose. Everyone still goes to the feast.</p>
+        </section>
+        <section class="highlight" aria-labelledby="hl-hall">
+          <h3 id="hl-hall">Hearthfire Hall</h3>
+          <p>The fires here have not gone out in three hundred years. Guests eat first, champions eat second, and the king eats whenever Grom the smith lets him through the door.</p>
+        </section>
+        <section class="highlight" aria-labelledby="hl-steppes">
+          <h3 id="hl-steppes">The Sunning Steppes</h3>
+          <p>Golden grass to the horizon. We hunt here at dawn and sleep here all afternoon. Interrupting a sun-nap is the rudest thing a guest can do, so tread softly.</p>
+        </section>
+        <section class="highlight" aria-labelledby="hl-wall">
+          <h3 id="hl-wall">The Featherwall</h3>
+          <p>Our border with Aviaria. The Avianis hid in their sky-city for generations; now they come down to play the Great Game with us on neutral stone. They are cunning players. We are louder ones. <a href="https://tobiasvyseri.com/Aviaria/avianchess.html">Try a game yourself<span class="visually-hidden"> (external site)</span></a>.</p>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <nav aria-label="Footer">
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="denizens.html">Denizens</a></li>
+        <li><a href="territories.html" aria-current="page">Territories</a></li>
+        <li><a href="https://tobiasvyseri.com/Aviaria/avianchess.html">The Great Game<span class="visually-hidden"> (external site)</span></a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+    <p class="copyright">&copy; 2026 Nekoropolis Office of Visitors &amp; Honour</p>
+  </footer>
+</body>
+</html>

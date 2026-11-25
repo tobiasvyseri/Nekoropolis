@@ -1,0 +1,11 @@
+{
+  "name": "The Nekoropolis",
+  "short_name": "Nekoropolis",
+  "icons": [
+    { "src": "icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "icon-512.png", "type": "image/png", "sizes": "512x512" }
+  ],
+  "theme_color": "#140D0B",
+  "background_color": "#140D0B",
+  "display": "standalone"
+}

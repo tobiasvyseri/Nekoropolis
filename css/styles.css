@@ -1,0 +1,1189 @@
+/* ==========================================================================
+   The Nekoropolis: styles.css
+   Mobile-first. Loaded after normalize.css on every page.
+   Order: custom properties, @font-face, base, layout, components,
+   utilities, media queries (min-width, ascending).
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Custom properties
+   -------------------------------------------------------------------------- */
+:root {
+  /* colours (text pairs: see plan.md 6.1, approved pairs only) */
+  --clr-night: #140d0b;
+  --clr-coal: #2a1a16;
+  --clr-blood: #8e1b1b;
+  --clr-ember: #c0392b; /* decorative only, never text */
+  --clr-gold: #d4a437;
+  --clr-gold-deep: #7a5710;
+  --clr-bone: #f3e9d2;
+  --clr-ink: #1e1412;
+  --clr-bone-shade: #eadcbd; /* cards, table stripes (ink 13.6:1, blood 6.8:1, gold-deep 4.9:1) */
+  --clr-field: #fffaf0;
+
+  /* fonts */
+  --ff-display: "Grenze Gotisch", "Palatino Linotype", Georgia, serif;
+  --ff-body: "Raleway", "Segoe UI", Arial, sans-serif;
+
+  /* type scale */
+  --fs-body: 1rem;
+  --fs-small: 0.9375rem;
+  --fs-h1: clamp(2.25rem, 1.6rem + 3vw, 3.5rem);
+  --fs-h2: clamp(1.75rem, 1.4rem + 1.6vw, 2.5rem);
+  --fs-h3: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem);
+  --fs-nav: 1.375rem;
+
+  /* spacing */
+  --space-xs: 0.25rem;
+  --space-s: 0.5rem;
+  --space-m: 1rem;
+  --space-l: 1.5rem;
+  --space-xl: 2.5rem;
+  --space-xxl: 4rem;
+  --gutter: 1rem;
+
+  /* motifs */
+  --fang-w: 2.5rem;
+  --fang-h: 1rem;
+  --rim: 0.1875rem;
+  --focus-width: 3px;
+  --hexagon: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  --notch: polygon(0.75rem 0, calc(100% - 0.75rem) 0, 100% 0.75rem, 100% calc(100% - 0.75rem), calc(100% - 0.75rem) 100%, 0.75rem 100%, 0 calc(100% - 0.75rem), 0 0.75rem);
+  --content-max: 64rem;
+  --measure: 70ch;
+}
+
+/* --------------------------------------------------------------------------
+   2. @font-face (self-hosted, SIL OFL 1.1)
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: "Grenze Gotisch";
+  src: url("../fonts/grenze-gotisch-latin-wght.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Raleway";
+  src: url("../fonts/raleway-latin-wght.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Raleway";
+  src: url("../fonts/raleway-latin-wght-italic.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* --------------------------------------------------------------------------
+   3. Base
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--ff-body);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--clr-ink);
+  background: var(--clr-night) url("../images/bg-claws.svg") repeat;
+  background-size: 10rem 10rem;
+  overflow-x: hidden;
+}
+
+img,
+video,
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--ff-display);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--clr-blood);
+  text-shadow: 0 0.06em 0 rgba(30, 20, 18, 0.25);
+  margin: 0 0 var(--space-m);
+}
+
+h1 {
+  font-size: var(--fs-h1);
+  font-weight: 800;
+  text-align: center;
+}
+
+h2 {
+  font-size: var(--fs-h2);
+}
+
+h3 {
+  font-size: var(--fs-h3);
+  font-weight: 600;
+}
+
+p,
+ul,
+ol,
+dl {
+  margin: 0 0 var(--space-m);
+}
+
+p {
+  max-width: var(--measure);
+}
+
+a {
+  color: var(--clr-gold-deep);
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+  font-weight: 600;
+}
+
+a:hover {
+  color: var(--clr-blood);
+  text-decoration-thickness: 0.14em;
+}
+
+:focus-visible {
+  outline: var(--focus-width) solid var(--clr-blood);
+  outline-offset: 3px;
+}
+
+[id] {
+  scroll-margin-top: var(--space-l);
+}
+
+/* --------------------------------------------------------------------------
+   4. Layout: header, hero, main, footer
+   -------------------------------------------------------------------------- */
+
+/* header (bar + hero, so the hero sits inside the banner landmark) */
+.site-header {
+  position: relative;
+  z-index: 20;
+}
+
+.header-bar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s);
+  padding: var(--space-s) var(--gutter);
+  background-color: var(--clr-night);
+  border-bottom: var(--rim) solid var(--clr-blood);
+}
+
+.site-logo {
+  margin-left: auto;
+  display: block;
+  border-radius: 0.25rem;
+}
+
+.site-logo img {
+  width: 9.5rem;
+}
+
+/* hero */
+.hero {
+  position: relative;
+  z-index: 1;
+  min-height: clamp(14rem, 55vw, 30rem);
+  background: var(--clr-night) url("../images/hero-skyline.svg") center bottom / cover no-repeat;
+  border-bottom: var(--rim) solid var(--clr-blood);
+}
+
+.hero-character {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 92%;
+  width: auto;
+  max-width: none;
+}
+
+.hero-wordmark {
+  display: none;
+}
+
+/* main content column */
+main {
+  position: relative;
+  z-index: 1;
+  background-color: var(--clr-bone);
+  padding: calc(var(--fang-h) + var(--space-xl)) var(--gutter) var(--space-xxl);
+}
+
+main > * {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section {
+  max-width: 54rem;
+  margin: 0 auto var(--space-xxl);
+}
+
+.section > p,
+.section > ul,
+.section > dl,
+.section > figure {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-title {
+  text-align: center;
+}
+
+/* footer */
+.site-footer {
+  position: relative;
+  background-color: var(--clr-coal);
+  color: var(--clr-bone);
+  text-align: center;
+  padding: var(--space-xl) var(--gutter) var(--space-l);
+  margin-top: calc(var(--fang-h) * 1.4);
+  border-top: var(--rim) solid var(--clr-blood);
+}
+
+.site-footer a {
+  color: var(--clr-gold);
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0 var(--space-s);
+}
+
+.site-footer a:hover {
+  color: var(--clr-bone);
+}
+
+.site-footer :focus-visible {
+  outline-color: var(--clr-gold);
+}
+
+.footer-links {
+  list-style: none;
+  margin: 0 0 var(--space-s);
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-links li + li {
+  border-left: 1px solid var(--clr-gold-deep);
+}
+
+.copyright {
+  margin: 0 auto;
+  font-size: var(--fs-small);
+}
+
+/* --------------------------------------------------------------------------
+   5. Components
+   -------------------------------------------------------------------------- */
+
+/* 5.1 menu button + site nav ------------------------------------------- */
+.menu-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 0.25rem;
+}
+
+.menu-button[hidden] {
+  display: none;
+}
+
+.menu-button img {
+  width: 2rem;
+  height: 2rem;
+}
+
+.site-header :focus-visible {
+  outline-color: var(--clr-gold);
+}
+
+.site-nav {
+  flex: 1 0 100%;
+  order: 3;
+}
+
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 var(--space-m);
+}
+
+.nav-list a {
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+  padding: 0 var(--space-s);
+  font-family: var(--ff-display);
+  font-weight: 600;
+  font-size: var(--fs-nav);
+  color: var(--clr-gold);
+  text-decoration: none;
+}
+
+.nav-list a:hover,
+.nav-list a[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-thickness: 0.1em;
+  text-underline-offset: 0.2em;
+}
+
+.nav-list a:hover {
+  color: var(--clr-bone);
+}
+
+/* collapsible panel: only when menu.js is running (adds .has-menu-js) */
+.has-menu-js .site-nav {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: min(16rem, 80vw);
+  padding: var(--space-m) var(--space-m) var(--space-l);
+  background-color: var(--clr-coal);
+  border-bottom: var(--rim) solid var(--clr-blood);
+  visibility: hidden;
+  transform: translateX(-105%);
+  transition: transform 0.25s ease, visibility 0.25s;
+}
+
+.has-menu-js .site-nav.is-open {
+  visibility: visible;
+  transform: none;
+}
+
+.has-menu-js .nav-list {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* 5.2 fang edges (CSS masks; colour comes from background-color) ------- */
+.header-bar::before,
+.header-bar::after,
+.hero::before,
+.hero::after,
+.has-menu-js .site-nav::before,
+.has-menu-js .site-nav::after,
+.site-footer::before,
+.site-footer::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + var(--rim));
+  height: var(--fang-h);
+  pointer-events: none;
+  -webkit-mask: url("../images/edge-fangs.svg") 0 0 / var(--fang-w) 100% repeat-x;
+  mask: url("../images/edge-fangs.svg") 0 0 / var(--fang-w) 100% repeat-x;
+}
+
+/* back row: blood, longer, offset half a tooth */
+.header-bar::before,
+.hero::before,
+.has-menu-js .site-nav::before,
+.site-footer::before {
+  height: calc(var(--fang-h) * 1.45);
+  background-color: var(--clr-blood);
+  -webkit-mask-position: calc(var(--fang-w) / 2) 0;
+  mask-position: calc(var(--fang-w) / 2) 0;
+}
+
+.header-bar::after,
+.hero::after {
+  background-color: var(--clr-night);
+}
+
+.has-menu-js .site-nav::after {
+  background-color: var(--clr-coal);
+}
+
+/* footer teeth point up */
+.site-footer::before,
+.site-footer::after {
+  top: auto;
+  bottom: calc(100% + var(--rim));
+  transform: scaleY(-1);
+}
+
+.site-footer::after {
+  background-color: var(--clr-coal);
+}
+
+/* 5.3 divider ---------------------------------------------------------- */
+.divider {
+  border: 0;
+  height: 1.875rem;
+  max-width: 18.75rem;
+  margin: var(--space-m) auto var(--space-xl);
+  background: url("../images/divider-claw.svg") center / contain no-repeat;
+}
+
+/* 5.4 home: proclamation, quick facts, explore cards ------------------ */
+.lede {
+  font-size: 1.125rem;
+}
+
+.proclamation {
+  margin: 0 auto;
+  max-width: 44rem;
+  padding: var(--space-l);
+  background-color: var(--clr-bone-shade);
+  border-left: 0.375rem solid var(--clr-blood);
+}
+
+.proclamation blockquote {
+  margin: 0 0 var(--space-m);
+  font-size: 1.125rem;
+  font-style: italic;
+}
+
+.proclamation blockquote p {
+  margin: 0;
+}
+
+.proclamation figcaption,
+.quote figcaption {
+  font-weight: 600;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.facts div {
+  display: grid;
+  grid-template-columns: minmax(0, 9rem) minmax(0, 1fr);
+  gap: var(--space-m);
+  padding: var(--space-s) 0;
+  border-bottom: 1px solid var(--clr-gold-deep);
+}
+
+.facts dt {
+  font-weight: 700;
+  color: var(--clr-blood);
+}
+
+.facts dd {
+  margin: 0;
+}
+
+.card-grid {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-l);
+}
+
+.card {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--clr-bone-shade);
+  border-top: 0.375rem solid var(--clr-blood);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background-color: var(--clr-coal);
+}
+
+.card-body {
+  padding: var(--space-m) var(--space-m) var(--space-l);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.card-body p {
+  flex-grow: 1;
+}
+
+.card h3 {
+  margin-bottom: var(--space-s);
+}
+
+.card:hover,
+.card:focus-within {
+  transform: translateY(-0.25rem);
+  box-shadow: 0 0.5rem 1rem rgba(20, 13, 11, 0.3), 0 0 0 3px var(--clr-gold);
+}
+
+/* 5.5 portraits (hexagon). clip-path lives on the frame + img, never on the link */
+.portrait-grid {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-l) var(--space-m);
+  max-width: 44rem;
+}
+
+.portrait-link {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: var(--clr-ink);
+  border-radius: 0.25rem;
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.portrait-frame {
+  display: block;
+  padding: 0.25rem;
+  background-color: var(--clr-gold-deep);
+  clip-path: var(--hexagon);
+  transition: background-color 0.2s ease;
+}
+
+.portrait-frame img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  clip-path: var(--hexagon);
+}
+
+.portrait-name {
+  display: block;
+  margin-top: var(--space-s);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: var(--clr-gold-deep);
+  text-underline-offset: 0.18em;
+}
+
+.portrait-link:hover,
+.portrait-link:focus-visible {
+  transform: translateY(-0.2rem);
+  filter: drop-shadow(0 0 0.35rem var(--clr-gold));
+  color: var(--clr-blood);
+}
+
+.portrait-link:hover .portrait-frame,
+.portrait-link:focus-visible .portrait-frame {
+  background-color: var(--clr-gold);
+}
+
+/* 5.6 profiles --------------------------------------------------------- */
+.profile {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "name"
+    "image"
+    "stats"
+    "quote"
+    "back";
+  gap: var(--space-m);
+  max-width: 54rem;
+  margin: 0 auto var(--space-xxl);
+  padding-top: var(--space-l);
+  border-top: 2px solid var(--clr-gold-deep);
+}
+
+.profile h2 {
+  grid-area: name;
+  text-align: center;
+  margin: 0;
+}
+
+.profile-image {
+  grid-area: image;
+  margin: 0 auto;
+  max-width: 22rem;
+}
+
+.profile-image img {
+  border: 0.25rem solid var(--clr-gold-deep);
+}
+
+.stats {
+  grid-area: stats;
+  margin: 0;
+}
+
+.stats div {
+  padding: var(--space-xs) 0 var(--space-s);
+  border-bottom: 1px dashed var(--clr-gold-deep);
+}
+
+.stats dt {
+  display: inline;
+  font-weight: 700;
+  color: var(--clr-blood);
+}
+
+.stats dt::after {
+  content: ":";
+}
+
+.stats dd {
+  display: inline;
+  margin: 0 0 0 0.25em;
+}
+
+.quote {
+  grid-area: quote;
+  margin: 0;
+  padding: var(--space-m) var(--space-l);
+  background-color: var(--clr-bone-shade);
+  border-left: 0.375rem solid var(--clr-blood);
+}
+
+.quote blockquote {
+  margin: 0 0 var(--space-s);
+  font-style: italic;
+  font-size: 1.0625rem;
+}
+
+.quote blockquote p {
+  margin: 0;
+}
+
+.back-link {
+  grid-area: back;
+  margin: 0;
+}
+
+/* 5.7 territories: map, place list, highlights -------------------------- */
+.map-figure {
+  margin: 0 auto var(--space-l);
+}
+
+.map-figure img {
+  width: 100%;
+  border: 0.25rem solid var(--clr-gold-deep);
+}
+
+figcaption {
+  font-size: var(--fs-small);
+  margin-top: var(--space-s);
+}
+
+.place-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 var(--space-s);
+}
+
+.place-list a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0 var(--space-s);
+}
+
+.highlights {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-l);
+}
+
+.highlight {
+  padding: var(--space-m) var(--space-l);
+  background-color: var(--clr-bone-shade);
+  border-top: 0.375rem solid var(--clr-blood);
+}
+
+.highlight p {
+  margin: 0;
+}
+
+/* 5.8 tables ----------------------------------------------------------- */
+.table-scroll {
+  overflow-x: auto;
+  margin: 0 0 var(--space-l);
+  border: 2px solid var(--clr-gold-deep);
+}
+
+.table-scroll:focus-visible {
+  outline: var(--focus-width) solid var(--clr-blood);
+  outline-offset: 3px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 40rem;
+}
+
+caption {
+  padding: var(--space-s) var(--space-m);
+  font-family: var(--ff-display);
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  color: var(--clr-blood);
+  text-align: left;
+}
+
+th,
+td {
+  padding: var(--space-s) var(--space-m);
+  text-align: left;
+  vertical-align: top;
+  border-top: 1px solid var(--clr-gold-deep);
+}
+
+thead th {
+  background-color: var(--clr-blood);
+  color: var(--clr-bone);
+  font-weight: 700;
+}
+
+tbody th {
+  font-weight: 700;
+  color: var(--clr-blood);
+}
+
+tbody tr:nth-child(even) {
+  background-color: var(--clr-bone-shade);
+}
+
+tbody tr:target {
+  outline: var(--focus-width) solid var(--clr-blood);
+  outline-offset: -3px;
+}
+
+/* credits table: stacked cards below 48em (still a real <table>) */
+.credits-table {
+  min-width: 0;
+}
+
+.credits-table caption {
+  padding: 0 0 var(--space-s);
+}
+
+.credits-table thead {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.credits-table tr {
+  display: block;
+  margin-bottom: var(--space-m);
+  border: 2px solid var(--clr-gold-deep);
+  background-color: var(--clr-bone);
+}
+
+.credits-table tbody tr:nth-child(even) {
+  background-color: var(--clr-bone-shade);
+}
+
+.credits-table th,
+.credits-table td {
+  display: block;
+  position: relative;
+  padding-left: 7rem;
+  border-top: 0;
+  border-bottom: 1px solid var(--clr-bone-shade);
+  overflow-wrap: anywhere;
+}
+
+.credits-table th::before,
+.credits-table td::before {
+  content: attr(data-label);
+  position: absolute;
+  left: var(--space-m);
+  font-weight: 700;
+  color: var(--clr-blood);
+}
+
+/* 5.9 video ------------------------------------------------------------ */
+.video-figure {
+  margin: 0 auto var(--space-xl);
+  max-width: 48rem;
+}
+
+.video-figure video {
+  width: 100%;
+  background-color: var(--clr-night);
+  border: 0.25rem solid var(--clr-gold-deep);
+}
+
+/* 5.10 AI disclosure + form ------------------------------------------- */
+.ai-list {
+  max-width: var(--measure);
+  padding-left: var(--space-l);
+}
+
+.ai-list li {
+  margin-bottom: var(--space-s);
+}
+
+.contact-form {
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+.contact-form fieldset {
+  margin: 0;
+  padding: var(--space-m) var(--space-m) var(--space-l);
+  border: 2px solid var(--clr-gold-deep);
+}
+
+.contact-form legend {
+  padding: 0 var(--space-s);
+  font-weight: 700;
+  color: var(--clr-blood);
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-m);
+}
+
+.form-row label {
+  font-weight: 700;
+}
+
+.required {
+  color: var(--clr-blood);
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: var(--space-s) var(--space-m);
+  font: inherit;
+  color: var(--clr-ink);
+  background-color: var(--clr-field);
+  border: 2px solid var(--clr-ink);
+  border-radius: 0;
+}
+
+textarea {
+  min-height: 9rem;
+  resize: vertical;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: var(--focus-width) solid var(--clr-blood);
+  outline-offset: 2px;
+}
+
+.button-frame {
+  display: inline-block;
+  margin-top: var(--space-s);
+}
+
+.button-frame:has(:focus-visible) {
+  outline: var(--focus-width) solid var(--clr-blood);
+  outline-offset: 3px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: var(--space-s) var(--space-xl);
+  font-family: var(--ff-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--clr-bone);
+  background-color: var(--clr-blood);
+  border: 0;
+  clip-path: var(--notch);
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: var(--clr-ink);
+}
+
+.button:focus-visible {
+  outline: none; /* indicator is drawn on .button-frame (clip-path would clip it) */
+}
+
+/* --------------------------------------------------------------------------
+   6. Utilities
+   -------------------------------------------------------------------------- */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: var(--space-s);
+  left: var(--space-s);
+  z-index: 100;
+  padding: var(--space-s) var(--space-m);
+  color: var(--clr-bone);
+  background-color: var(--clr-blood);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+  outline: var(--focus-width) solid var(--clr-gold);
+  outline-offset: 2px;
+}
+
+.center {
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   7. Media queries (min-width, ascending)
+   -------------------------------------------------------------------------- */
+@media (min-width: 30em) {
+  .card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .site-logo img {
+    width: 11rem;
+  }
+}
+
+@media (min-width: 48em) {
+  :root {
+    --gutter: 2rem;
+    --fang-w: 3rem;
+    --fang-h: 1.25rem;
+  }
+
+  .hero-character {
+    left: auto;
+    right: 8%;
+    transform: none;
+  }
+
+  .hero-wordmark {
+    display: block;
+    position: absolute;
+    left: 4%;
+    bottom: 2.25rem;
+    width: clamp(14rem, 28vw, 24rem);
+  }
+
+  .portrait-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .profile {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    grid-template-rows: auto 1fr auto auto;
+    grid-template-areas:
+      "image name"
+      "image stats"
+      "quote quote"
+      "back back";
+    column-gap: var(--space-xl);
+  }
+
+  .profile h2 {
+    text-align: left;
+    align-self: end;
+  }
+
+  .profile-image {
+    max-width: none;
+  }
+
+  .highlights {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .form-row {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .form-row label {
+    flex: 0 0 8rem;
+    padding-top: var(--space-s);
+  }
+
+  .form-actions {
+    padding-left: 8rem;
+  }
+
+  /* credits table back to a normal table */
+  .credits-table thead {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+    white-space: normal;
+  }
+
+  .credits-table tr {
+    display: table-row;
+    margin: 0;
+    border: 0;
+  }
+
+  .credits-table th,
+  .credits-table td {
+    display: table-cell;
+    padding-left: var(--space-m);
+    border-top: 1px solid var(--clr-gold-deep);
+    border-bottom: 0;
+    overflow-wrap: normal;
+  }
+
+  .credits-table th::before,
+  .credits-table td::before {
+    content: none;
+  }
+
+  .credits-table caption {
+    padding: var(--space-s) var(--space-m);
+  }
+
+  .credits-scroll {
+    overflow-x: auto;
+    border: 2px solid var(--clr-gold-deep);
+  }
+}
+
+@media (min-width: 64em) {
+  :root {
+    --gutter: 3rem;
+    --fs-nav: 1.625rem;
+  }
+
+  .header-bar {
+    flex-wrap: nowrap;
+    padding-top: var(--space-m);
+    padding-bottom: var(--space-s);
+  }
+
+  .site-logo {
+    margin-left: 0;
+  }
+
+  .site-logo img {
+    width: 12rem;
+  }
+
+  .menu-button,
+  .menu-button[hidden] {
+    display: none;
+  }
+
+  .site-nav,
+  .has-menu-js .site-nav {
+    position: static;
+    flex: 0 1 auto;
+    order: 0;
+    width: auto;
+    padding: 0;
+    background: none;
+    visibility: visible;
+    transform: none;
+    transition: none;
+  }
+
+  .has-menu-js .site-nav::before,
+  .has-menu-js .site-nav::after {
+    content: none;
+  }
+
+  .nav-list,
+  .has-menu-js .nav-list {
+    flex-direction: row;
+    align-items: center;
+    gap: 0 var(--space-l);
+  }
+
+  main {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding-left: var(--space-xxl);
+    padding-right: var(--space-xxl);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .has-menu-js .site-nav,
+  .card,
+  .portrait-link,
+  .portrait-frame {
+    transition: none;
+  }
+
+  .card:hover,
+  .card:focus-within,
+  .portrait-link:hover,
+  .portrait-link:focus-visible {
+    transform: none;
+  }
+}
