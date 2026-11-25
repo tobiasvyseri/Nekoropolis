@@ -395,8 +395,10 @@ main > * {
   top: calc(100% + var(--rim));
   height: var(--fang-h);
   pointer-events: none;
-  -webkit-mask: url("../images/edge-fangs.svg") 0 0 / var(--fang-w) 100% repeat-x;
-  mask: url("../images/edge-fangs.svg") 0 0 / var(--fang-w) 100% repeat-x;
+  /* the tooth shape is inlined (same as images/edge-fangs.svg) because browsers
+     block mask files on file:// pages, which made the spikes vanish locally */
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='20' preserveAspectRatio='none' viewBox='0 0 40 20'%3E%3Cpath d='M0 0h40L20 20Z'/%3E%3C/svg%3E") 0 0 / var(--fang-w) 100% repeat-x;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='20' preserveAspectRatio='none' viewBox='0 0 40 20'%3E%3Cpath d='M0 0h40L20 20Z'/%3E%3C/svg%3E") 0 0 / var(--fang-w) 100% repeat-x;
 }
 
 /* back row: blood, longer, offset half a tooth */
