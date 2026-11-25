@@ -13,6 +13,7 @@
   --clr-night: #140d0b;
   --clr-coal: #2a1a16;
   --clr-wine: #4a1512; /* page background behind the content column */
+  --clr-dusk: #3a1210; /* hero sky */
   --clr-blood: #8e1b1b;
   --clr-ember: #c0392b; /* decorative only, never text */
   --clr-gold: #d4a437;
@@ -46,7 +47,6 @@
   /* motifs */
   --fang-w: 2.5rem;
   --fang-h: 1rem;
-  --rim: 0.1875rem;
   --focus-width: 3px;
   --hexagon: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
   --notch: polygon(0.75rem 0, calc(100% - 0.75rem) 0, 100% 0.75rem, 100% calc(100% - 0.75rem), calc(100% - 0.75rem) 100%, 0.75rem 100%, 0 calc(100% - 0.75rem), 0 0.75rem);
@@ -189,7 +189,6 @@ a:hover {
   gap: var(--space-s);
   padding: var(--space-s) var(--gutter);
   background-color: var(--clr-night);
-  border-bottom: var(--rim) solid var(--clr-blood);
 }
 
 .site-logo {
@@ -202,13 +201,35 @@ a:hover {
   width: 9.5rem;
 }
 
-/* hero */
+/* hero: three rock layers that scroll left at different speeds (parallax).
+   Each layer SVG is 1600x500 and tiles seamlessly, so one tile is 3.2x the hero height. */
 .hero {
+  --hero-h: clamp(14rem, 55vw, 30rem);
+  --tile-w: calc(var(--hero-h) * 3.2);
   position: relative;
   z-index: 1;
-  min-height: clamp(14rem, 55vw, 30rem);
-  background: var(--clr-night) url("../images/hero-skyline.svg") center bottom / cover no-repeat;
-  border-bottom: var(--rim) solid var(--clr-blood);
+  min-height: var(--hero-h);
+  background-color: var(--clr-dusk);
+  /* first listed = drawn on top */
+  background-image:
+    url("../images/hero-rocks-front.svg"),
+    url("../images/hero-rocks-mid.svg"),
+    url("../images/hero-rocks-back.svg");
+  background-repeat: repeat-x;
+  background-size: var(--tile-w) 100%;
+  background-position: 0 100%;
+  animation: hero-scroll 60s linear infinite;
+}
+
+/* each layer moves a whole number of tiles per loop (3, 2, 1), so the loop is
+   seamless and the front rocks move 3x as fast as the back ones */
+@keyframes hero-scroll {
+  to {
+    background-position:
+      calc(var(--tile-w) * -3) 100%,
+      calc(var(--tile-w) * -2) 100%,
+      calc(var(--tile-w) * -1) 100%;
+  }
 }
 
 .hero-wordmark {
@@ -254,7 +275,6 @@ main > * {
   color: var(--clr-bone);
   text-align: center;
   padding: var(--space-xl) var(--gutter) var(--space-l);
-  border-top: var(--rim) solid var(--clr-blood);
 }
 
 .site-footer a {
@@ -363,7 +383,6 @@ main > * {
   width: min(16rem, 80vw);
   padding: var(--space-m) var(--space-m) var(--space-l);
   background-color: var(--clr-coal);
-  border-bottom: var(--rim) solid var(--clr-blood);
   visibility: hidden;
   transform: translateX(-105%);
   transition: transform 0.25s ease, visibility 0.25s;
@@ -392,7 +411,7 @@ main > * {
   position: absolute;
   left: 0;
   right: 0;
-  top: calc(100% + var(--rim));
+  top: 100%;
   height: var(--fang-h);
   pointer-events: none;
   /* the tooth shape is inlined (same as images/edge-fangs.svg) because browsers
@@ -425,7 +444,7 @@ main > * {
 .site-footer::before,
 .site-footer::after {
   top: auto;
-  bottom: calc(100% + var(--rim));
+  bottom: 100%;
   transform: scaleY(-1);
 }
 
@@ -1069,6 +1088,10 @@ textarea:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .hero {
+    animation: none;
   }
 
   .has-menu-js .site-nav,
