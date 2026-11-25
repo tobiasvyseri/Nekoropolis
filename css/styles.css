@@ -12,6 +12,7 @@
   /* colours (text pairs: see plan.md 6.1, approved pairs only) */
   --clr-night: #140d0b;
   --clr-coal: #2a1a16;
+  --clr-wine: #4a1512; /* page background behind the content column */
   --clr-blood: #8e1b1b;
   --clr-ember: #c0392b; /* decorative only, never text */
   --clr-gold: #d4a437;
@@ -99,7 +100,7 @@ body {
   font-size: var(--fs-body);
   line-height: 1.6;
   color: var(--clr-ink);
-  background: var(--clr-night) url("../images/bg-claws.svg") repeat;
+  background: var(--clr-wine) url("../images/bg-claws.svg") repeat;
   background-size: 10rem 10rem;
   overflow-x: hidden;
 }
@@ -151,15 +152,12 @@ p {
 
 a {
   color: var(--clr-gold-deep);
-  text-decoration: underline;
-  text-decoration-thickness: 0.08em;
-  text-underline-offset: 0.18em;
+  text-decoration: none;
   font-weight: 600;
 }
 
 a:hover {
   color: var(--clr-blood);
-  text-decoration-thickness: 0.14em;
 }
 
 :focus-visible {
@@ -213,16 +211,6 @@ a:hover {
   border-bottom: var(--rim) solid var(--clr-blood);
 }
 
-.hero-character {
-  position: absolute;
-  bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 92%;
-  width: auto;
-  max-width: none;
-}
-
 .hero-wordmark {
   display: none;
 }
@@ -232,7 +220,8 @@ main {
   position: relative;
   z-index: 1;
   background-color: var(--clr-bone);
-  padding: calc(var(--fang-h) + var(--space-xl)) var(--gutter) var(--space-xxl);
+  /* bottom padding leaves room for the footer teeth, which overlap main */
+  padding: calc(var(--fang-h) + var(--space-xl)) var(--gutter) calc(var(--fang-h) * 1.45 + var(--space-xxl));
 }
 
 main > * {
@@ -260,11 +249,11 @@ main > * {
 /* footer */
 .site-footer {
   position: relative;
+  z-index: 2; /* above main, so the teeth bite into the content column */
   background-color: var(--clr-coal);
   color: var(--clr-bone);
   text-align: center;
   padding: var(--space-xl) var(--gutter) var(--space-l);
-  margin-top: calc(var(--fang-h) * 1.4);
   border-top: var(--rim) solid var(--clr-blood);
 }
 
@@ -363,12 +352,6 @@ main > * {
 
 .nav-list a:hover,
 .nav-list a[aria-current="page"] {
-  text-decoration: underline;
-  text-decoration-thickness: 0.1em;
-  text-underline-offset: 0.2em;
-}
-
-.nav-list a:hover {
   color: var(--clr-bone);
 }
 
@@ -457,7 +440,7 @@ main > * {
   background: url("../images/divider-claw.svg") center / contain no-repeat;
 }
 
-/* 5.4 home: proclamation, quick facts, explore cards ------------------ */
+/* 5.4 home: proclamation ---------------------------------------------- */
 .lede {
   font-size: 1.125rem;
 }
@@ -483,77 +466,6 @@ main > * {
 .proclamation figcaption,
 .quote figcaption {
   font-weight: 600;
-}
-
-.facts {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
-  max-width: 40rem;
-  margin: 0 auto;
-}
-
-.facts div {
-  display: grid;
-  grid-template-columns: minmax(0, 9rem) minmax(0, 1fr);
-  gap: var(--space-m);
-  padding: var(--space-s) 0;
-  border-bottom: 1px solid var(--clr-gold-deep);
-}
-
-.facts dt {
-  font-weight: 700;
-  color: var(--clr-blood);
-}
-
-.facts dd {
-  margin: 0;
-}
-
-.card-grid {
-  list-style: none;
-  padding: 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-l);
-}
-
-.card {
-  position: relative;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--clr-bone-shade);
-  border-top: 0.375rem solid var(--clr-blood);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  background-color: var(--clr-coal);
-}
-
-.card-body {
-  padding: var(--space-m) var(--space-m) var(--space-l);
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-}
-
-.card-body p {
-  flex-grow: 1;
-}
-
-.card h3 {
-  margin-bottom: var(--space-s);
-}
-
-.card:hover,
-.card:focus-within {
-  transform: translateY(-0.25rem);
-  box-shadow: 0 0.5rem 1rem rgba(20, 13, 11, 0.3), 0 0 0 3px var(--clr-gold);
 }
 
 /* 5.5 portraits (hexagon). clip-path lives on the frame + img, never on the link */
@@ -594,9 +506,6 @@ main > * {
   display: block;
   margin-top: var(--space-s);
   font-weight: 700;
-  text-decoration: underline;
-  text-decoration-color: var(--clr-gold-deep);
-  text-underline-offset: 0.18em;
 }
 
 .portrait-link:hover,
@@ -994,10 +903,6 @@ textarea:focus-visible {
    7. Media queries (min-width, ascending)
    -------------------------------------------------------------------------- */
 @media (min-width: 30em) {
-  .card-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .site-logo img {
     width: 11rem;
   }
@@ -1010,12 +915,6 @@ textarea:focus-visible {
     --fang-h: 1.25rem;
   }
 
-  .hero-character {
-    left: auto;
-    right: 8%;
-    transform: none;
-  }
-
   .hero-wordmark {
     display: block;
     position: absolute;
@@ -1026,10 +925,6 @@ textarea:focus-visible {
 
   .portrait-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .card-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .profile {
@@ -1143,6 +1038,7 @@ textarea:focus-visible {
     width: auto;
     padding: 0;
     background: none;
+    border-bottom: 0; /* the mobile panel's border was showing as a line under the nav */
     visibility: visible;
     transform: none;
     transition: none;
@@ -1174,14 +1070,11 @@ textarea:focus-visible {
   }
 
   .has-menu-js .site-nav,
-  .card,
   .portrait-link,
   .portrait-frame {
     transition: none;
   }
 
-  .card:hover,
-  .card:focus-within,
   .portrait-link:hover,
   .portrait-link:focus-visible {
     transform: none;
