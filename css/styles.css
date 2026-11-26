@@ -254,7 +254,7 @@ a:hover {
   bottom: calc(var(--fang-h) + 0.5rem);
   height: 45%;
   aspect-ratio: 450 / 306; /* one frame */
-  background: url("../images/hero-runner.png") 0 0 / 800% 100% no-repeat; /* silhouette in the page-background red */
+  background: url("../images/hero-runner.png") 0 0 / 800% 100% no-repeat; /* silhouette in the sky colour (--clr-dusk) */
   animation: hero-run 0.8s steps(8) infinite;
 }
 
