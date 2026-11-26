@@ -12,9 +12,10 @@
   /* colours (text pairs: see plan.md 6.1, approved pairs only) */
   --clr-night: #140d0b;
   --clr-coal: #2a1a16;
-  --clr-wine: #6c0b22; /* page background behind the content column: the logo red */
+  --clr-wine: #4a1512; /* page background behind the content column */
   --clr-dusk: #3a1210; /* hero sky */
-  --clr-blood: #6c0b22; /* the logo red: all text on bone, and the page background */
+  --clr-blood: #4a1512; /* all text on bone: the same dark red as the page background */
+  --clr-logo: #6c0b22; /* the logo red: decorative only (back-row fangs, side diamonds) */
   --clr-ember: #c0392b; /* decorative only, never text */
   --clr-flame: #e04a3a; /* menu hover / current page on the dark bars (4.7:1 on night) */
   --clr-gold: #d4a437;
@@ -32,10 +33,10 @@
   /* type scale */
   --fs-body: 1rem;
   --fs-small: 0.9375rem;
-  --fs-h1: clamp(1.75rem, 1.4rem + 1.8vw, 2.5rem);
-  --fs-h2: clamp(1.375rem, 1.2rem + 1vw, 1.875rem);
-  --fs-h3: clamp(1.125rem, 1.05rem + 0.5vw, 1.375rem);
-  --fs-nav: 1.125rem;
+  --fs-h1: clamp(1.5rem, 1.25rem + 1.2vw, 2rem);
+  --fs-h2: clamp(1.25rem, 1.1rem + 0.7vw, 1.5rem);
+  --fs-h3: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+  --fs-nav: 1rem;
 
   /* spacing */
   --space-xs: 0.25rem;
@@ -476,7 +477,7 @@ main > * {
 .has-menu-js .site-nav::before,
 .site-footer::before {
   height: calc(var(--fang-h) * 1.45);
-  background-color: var(--clr-blood);
+  background-color: var(--clr-logo);
   -webkit-mask-position: calc(var(--fang-w) / 2) 0;
   mask-position: calc(var(--fang-w) / 2) 0;
 }
@@ -962,7 +963,7 @@ textarea:focus-visible {
 @media (min-width: 64em) {
   :root {
     --gutter: 3rem;
-    --fs-nav: 1.3rem;
+    --fs-nav: 1.125rem;
   }
 
   .header-bar {
