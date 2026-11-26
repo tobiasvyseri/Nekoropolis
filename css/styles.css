@@ -65,6 +65,7 @@
 @font-face {
   font-family: "Scratchies"; /* Darrell Flood; converted from TTF */
   src: url("../fonts/scratchies.woff2") format("woff2");
+  size-adjust: 70%; /* Scratchies draws far bigger than other fonts at the same size; this shrinks every use of it */
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -815,7 +816,7 @@ textarea:focus-visible {
   min-height: 2.75rem;
   padding: var(--space-s) var(--space-xl);
   font-family: var(--ff-headline);
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 400; /* Scratchies has one weight */
   color: var(--clr-bone);
   background-color: var(--clr-blood);
