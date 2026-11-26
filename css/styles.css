@@ -214,17 +214,6 @@ a:hover {
   width: 9.5rem;
 }
 
-/* the logo is dark red, so give it the same thin gold outline as the headings
-   to lift it off the dark nav and hero */
-.site-logo img,
-.hero-wordmark {
-  filter:
-    drop-shadow(1px 0 0 var(--clr-gold))
-    drop-shadow(-1px 0 0 var(--clr-gold))
-    drop-shadow(0 1px 0 var(--clr-gold))
-    drop-shadow(0 -1px 0 var(--clr-gold));
-}
-
 /* hero: three rock layers that scroll left at different speeds (parallax).
    Each layer SVG is 1600x500 and tiles seamlessly, so one tile is 3.2x the hero height. */
 .hero {
@@ -502,9 +491,10 @@ main > * {
 /* 5.3 divider ---------------------------------------------------------- */
 .divider {
   border: 0;
-  height: 1.875rem;
-  max-width: 18.75rem;
-  margin: var(--space-m) auto var(--space-xl);
+  width: min(14rem, 70%);
+  height: auto;
+  aspect-ratio: 1143 / 431; /* the traced claw-mark image */
+  margin: var(--space-s) auto var(--space-l);
   background: url("../images/divider-claw.svg") center / contain no-repeat;
 }
 
