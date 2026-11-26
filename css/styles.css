@@ -271,7 +271,7 @@ main {
   z-index: 1;
   background-color: var(--clr-bone);
   /* bottom padding leaves room for the footer teeth, which overlap main */
-  padding: calc(var(--fang-h) + var(--space-xl)) var(--gutter) calc(var(--fang-h) * 1.2 + var(--space-xxl));
+  padding: calc(var(--fang-h) + var(--space-xl)) var(--gutter) calc(var(--fang-h) + var(--space-xxl));
 }
 
 main > * {
@@ -462,7 +462,7 @@ main > * {
 .hero::before,
 .has-menu-js .site-nav::before,
 .site-footer::before {
-  height: calc(var(--fang-h) * 1.2);
+  height: var(--fang-h);
   background-color: var(--clr-red);
   -webkit-mask-position: calc(var(--fang-w) / 2) 0;
   mask-position: calc(var(--fang-w) / 2) 0;
