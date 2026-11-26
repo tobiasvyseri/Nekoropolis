@@ -232,7 +232,7 @@ a:hover {
   background-repeat: repeat-x;
   background-size: var(--tile-w) 100%;
   background-position: 0 100%;
-  animation: hero-scroll 60s linear infinite;
+  animation: hero-scroll 24s linear infinite;
 }
 
 /* each layer moves a whole number of tiles per loop (3, 2, 1), so the loop is
@@ -255,7 +255,7 @@ a:hover {
   bottom: calc(var(--fang-h) + 0.5rem);
   height: 45%;
   aspect-ratio: 450 / 306; /* one frame */
-  background: url("../images/hero-runner.png") 0 0 / 800% 100% no-repeat; /* logo-red silhouette */
+  background: url("../images/hero-runner.png") 0 0 / 800% 100% no-repeat; /* silhouette in the page-background red */
   animation: hero-run 0.8s steps(8) infinite;
 }
 
