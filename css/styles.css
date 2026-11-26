@@ -12,12 +12,9 @@
   /* colours (text pairs: see plan.md 6.1, approved pairs only) */
   --clr-night: #140d0b;
   --clr-coal: #2a1a16;
-  --clr-wine: #4a1512; /* page background behind the content column */
-  --clr-dusk: #3a1210; /* hero sky */
-  --clr-blood: #4a1512; /* all text on bone: the same dark red as the page background */
-  --clr-logo: #6c0b22; /* the logo red: decorative only (back-row fangs, side diamonds) */
-  --clr-ember: #c0392b; /* decorative only, never text */
-  --clr-flame: #e04a3a; /* menu hover / current page on the dark bars (4.7:1 on night) */
+  /* only two reds on the whole site */
+  --clr-red-dark: #3a1210; /* page + sky background, runner, headings, dividers, all text */
+  --clr-red: #6c0b22; /* the logo red: links, spikes, diamonds, paw prints, mountains */
   --clr-gold: #d4a437;
   --clr-gold-deep: #7a5710;
   --clr-bone: #f3e9d2;
@@ -113,8 +110,8 @@ body {
   font-family: var(--ff-body);
   font-size: var(--fs-body);
   line-height: 1.6;
-  color: var(--clr-blood);
-  background: var(--clr-wine) url("../images/bg-tracks.svg") repeat;
+  color: var(--clr-red-dark);
+  background: var(--clr-red-dark) url("../images/bg-tracks.svg") repeat;
   background-size: 30rem 30rem;
   overflow-x: hidden;
 }
@@ -133,7 +130,7 @@ h3 {
   font-family: var(--ff-headline);
   font-weight: 400; /* Scratchies has one weight; stops the browser faking bold */
   line-height: 1.15;
-  color: var(--clr-blood);
+  color: var(--clr-red-dark);
   margin: 0 0 var(--space-m);
 }
 
@@ -164,17 +161,17 @@ p {
 }
 
 a {
-  color: var(--clr-blood);
+  color: var(--clr-red);
   text-decoration: none;
   font-weight: 600;
 }
 
 a:hover {
-  color: var(--clr-flame);
+  color: var(--clr-night); /* body links go black */
 }
 
 :focus-visible {
-  outline: var(--focus-width) solid var(--clr-blood);
+  outline: var(--focus-width) solid var(--clr-red-dark);
   outline-offset: 3px;
 }
 
@@ -222,7 +219,7 @@ a:hover {
   position: relative;
   z-index: 1;
   min-height: var(--hero-h);
-  background-color: var(--clr-dusk);
+  background-color: var(--clr-red-dark);
   /* first listed = drawn on top */
   background-image:
     url("../images/hero-rocks-front.svg"),
@@ -254,7 +251,7 @@ a:hover {
   bottom: calc(var(--fang-h) + 0.5rem);
   height: 45%;
   aspect-ratio: 450 / 306; /* one frame */
-  background: url("../images/hero-runner.png") 0 0 / 800% 100% no-repeat; /* silhouette in the sky colour (--clr-dusk) */
+  background: url("../images/hero-runner.png") 0 0 / 800% 100% no-repeat; /* silhouette in --clr-red-dark */
   animation: hero-run 0.8s steps(8) infinite;
 }
 
@@ -326,7 +323,7 @@ main > * {
 }
 
 .site-footer a:hover {
-  color: var(--clr-flame);
+  color: var(--clr-red);
 }
 
 .site-footer :focus-visible {
@@ -413,7 +410,7 @@ main > * {
 
 .nav-list a:hover,
 .nav-list a[aria-current="page"] {
-  color: var(--clr-flame);
+  color: var(--clr-red);
 }
 
 /* collapsible panel: only when menu.js is running (adds .has-menu-js) */
@@ -467,7 +464,7 @@ main > * {
 .has-menu-js .site-nav::before,
 .site-footer::before {
   height: calc(var(--fang-h) * 1.45);
-  background-color: var(--clr-logo);
+  background-color: var(--clr-red);
   -webkit-mask-position: calc(var(--fang-w) / 2) 0;
   mask-position: calc(var(--fang-w) / 2) 0;
 }
@@ -513,7 +510,7 @@ main > * {
   max-width: 44rem;
   padding: var(--space-l);
   background-color: var(--clr-bone-shade);
-  border-left: 0.375rem solid var(--clr-blood);
+  border-left: 0.375rem solid var(--clr-red-dark);
 }
 
 .proclamation blockquote {
@@ -631,7 +628,7 @@ main > * {
 .stats dt {
   display: inline;
   font-weight: 700;
-  color: var(--clr-blood);
+  color: var(--clr-red-dark);
 }
 
 .stats dt::after {
@@ -759,7 +756,7 @@ figcaption {
 .contact-form legend {
   padding: 0;
   font-weight: 700;
-  color: var(--clr-blood);
+  color: var(--clr-red-dark);
 }
 
 .form-row {
@@ -774,7 +771,7 @@ figcaption {
 }
 
 .required {
-  color: var(--clr-blood);
+  color: var(--clr-red-dark);
 }
 
 input,
@@ -784,7 +781,7 @@ textarea {
   min-height: 2.75rem;
   padding: var(--space-s) var(--space-m);
   font: inherit;
-  color: var(--clr-blood);
+  color: var(--clr-red-dark);
   background-color: var(--clr-field);
   /* no box: just a line underneath, so the field is still visible as a field */
   border: 0;
@@ -800,7 +797,7 @@ textarea {
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  outline: var(--focus-width) solid var(--clr-blood);
+  outline: var(--focus-width) solid var(--clr-red-dark);
   outline-offset: 2px;
 }
 
@@ -810,7 +807,7 @@ textarea:focus-visible {
 }
 
 .button-frame:has(:focus-visible) {
-  outline: var(--focus-width) solid var(--clr-blood);
+  outline: var(--focus-width) solid var(--clr-red-dark);
   outline-offset: 3px;
 }
 
@@ -823,14 +820,14 @@ textarea:focus-visible {
   font-size: 1.25rem;
   font-weight: 400; /* Scratchies has one weight */
   color: var(--clr-bone);
-  background-color: var(--clr-blood);
+  background-color: var(--clr-red-dark);
   border: 0;
   clip-path: var(--notch);
   cursor: pointer;
 }
 
 .button:hover {
-  background-color: var(--clr-flame);
+  background-color: var(--clr-red);
 }
 
 .button:focus-visible {
@@ -859,7 +856,7 @@ textarea:focus-visible {
   z-index: 100;
   padding: var(--space-s) var(--space-m);
   color: var(--clr-bone);
-  background-color: var(--clr-blood);
+  background-color: var(--clr-red-dark);
   transform: translateY(-200%);
 }
 
