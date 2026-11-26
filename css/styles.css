@@ -102,8 +102,8 @@ body {
   font-size: var(--fs-body);
   line-height: 1.6;
   color: var(--clr-ink);
-  background: var(--clr-wine) url("../images/bg-claws.svg") repeat;
-  background-size: 10rem 10rem;
+  background: var(--clr-wine) url("../images/bg-tracks.svg") repeat;
+  background-size: 15rem 15rem;
   overflow-x: hidden;
 }
 
@@ -206,6 +206,17 @@ a:hover {
 
 .site-logo img {
   width: 9.5rem;
+}
+
+/* the logo is dark red, so give it the same thin gold outline as the headings
+   to lift it off the dark nav and hero */
+.site-logo img,
+.hero-wordmark {
+  filter:
+    drop-shadow(1px 0 0 var(--clr-gold))
+    drop-shadow(-1px 0 0 var(--clr-gold))
+    drop-shadow(0 1px 0 var(--clr-gold))
+    drop-shadow(0 -1px 0 var(--clr-gold));
 }
 
 /* hero: three rock layers that scroll left at different speeds (parallax).
@@ -859,7 +870,7 @@ textarea:focus-visible {
     position: absolute;
     left: 4%;
     bottom: 2.25rem;
-    width: clamp(14rem, 28vw, 24rem);
+    width: clamp(16rem, 34vw, 30rem);
   }
 
   .portrait-grid li {
