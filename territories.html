@@ -45,8 +45,22 @@
       <hr class="divider">
       <p class="center">Our city climbs from the river to the red cliffs. Here is where to go, and how not to embarrass yourself once you get there.</p>
       <figure class="map-figure">
-        <img src="images/map-placeholder.svg" alt="Placeholder map of the Nekoropolis. In the north, Scratchstone Cliffs on the left and the Sunthrone cliff-hall on the right. Below them, the Shrine of the Sun-Eye spire in the centre, the Kittenfold to the west and Hearthfire Hall to the east. The round Proving Ring sits at the centre of the city. The Fang River crosses from west to east, with Fishgate Docks on its eastern bank. South of the river are the Ember Forge and the grassy Sunning Steppes, and the Featherwall runs along the southern border toward Aviaria." width="1200" height="800">
-        <figcaption>Placeholder map. Final illustrated map coming soon. <a href="images/map-placeholder.svg">View the map full size</a>.</figcaption>
+        <!-- the invisible links over the map are for mouse and touch; keyboard and
+             screen reader users get the same links in the list below -->
+        <div class="map-frame">
+          <img src="images/map-placeholder.svg" alt="Placeholder map of the Nekoropolis. In the north, Scratchstone Cliffs on the left and the Sunthrone cliff-hall on the right. Below them, the Shrine of the Sun-Eye spire in the centre, the Kittenfold to the west and Hearthfire Hall to the east. The round Proving Ring sits at the centre of the city. The Fang River crosses from west to east, with Fishgate Docks on its eastern bank. South of the river are the Ember Forge and the grassy Sunning Steppes, and the Featherwall runs along the southern border toward Aviaria." width="1200" height="800">
+          <a class="map-spot" href="#sunthrone" tabindex="-1" aria-hidden="true"></a>
+          <a class="map-spot" href="#proving-ring" tabindex="-1" aria-hidden="true"></a>
+          <a class="map-spot" href="#sun-shrine" tabindex="-1" aria-hidden="true"></a>
+          <a class="map-spot" href="#hearthfire-hall" tabindex="-1" aria-hidden="true"></a>
+          <a class="map-spot" href="#kittenfold" tabindex="-1" aria-hidden="true"></a>
+          <a class="map-spot" href="#scratchstone-cliffs" tabindex="-1" aria-hidden="true"></a>
+          <a class="map-spot" href="#sunning-steppes" tabindex="-1" aria-hidden="true"></a>
+          <a class="map-spot" href="#ember-forge" tabindex="-1" aria-hidden="true"></a>
+          <a class="map-spot" href="#fishgate-docks" tabindex="-1" aria-hidden="true"></a>
+          <a class="map-spot" href="#featherwall" tabindex="-1" aria-hidden="true"></a>
+        </div>
+        <figcaption>Choose a place on the map or in the list below to read about it.</figcaption>
       </figure>
       <h2 class="visually-hidden">Places on the map</h2>
       <ul class="place-list">
@@ -63,108 +77,68 @@
       </ul>
     </section>
 
-    <section class="section" aria-labelledby="places-heading">
-      <h2 id="places-heading" class="section-title">A Visitor's Guide</h2>
-      <div class="table-scroll" tabindex="0" role="region" aria-labelledby="places-caption">
-        <table>
-          <caption id="places-caption">Places of Note</caption>
-          <thead>
-            <tr>
-              <th scope="col">Place</th>
-              <th scope="col">What happens there</th>
-              <th scope="col">Visitor's tip</th>
-            </tr>
-          </thead>
-          <tbody>
-          <tr id="sunthrone">
-            <th scope="row">The Sunthrone</th>
-            <td>The great hall of the King, carved into a cliff of red rock. Petitions are heard at noon, judgements at dusk.</td>
-            <td>Bow to the throne, not the king. He prefers it that way.</td>
-          </tr>
-          <tr id="proving-ring">
-            <th scope="row">The Proving Ring</th>
-            <td>A sand arena at the heart of the city. Duels, trials of rank and the loudest festivals in the land.</td>
-            <td>Watchers cheer for both fighters. Booing a loser is the only real foul.</td>
-          </tr>
-          <tr id="sun-shrine">
-            <th scope="row">The Shrine of the Sun-Eye</th>
-            <td>The High Seer's temple: a stone spire capped in gold that catches the first light.</td>
-            <td>Come at dawn. Ask one question. Expect a riddle back.</td>
-          </tr>
-          <tr id="hearthfire-hall">
-            <th scope="row">Hearthfire Hall</th>
-            <td>The feast hall that never closes. Guests eat first, always.</td>
-            <td>Claws sheathed at the hearth. Arguments wait until the plates are empty.</td>
-          </tr>
-          <tr id="kittenfold">
-            <th scope="row">The Kittenfold</th>
-            <td>Where young Nekoro are raised together and taught to climb, spar and boast properly.</td>
-            <td>Visitors are welcome. Expect to be climbed.</td>
-          </tr>
-          <tr id="scratchstone-cliffs">
-            <th scope="row">Scratchstone Cliffs</th>
-            <td>Claw-scarred climbing cliffs where warriors train their grip and nerve.</td>
-            <td>Add your own mark low on the rock. The high marks belong to champions.</td>
-          </tr>
-          <tr id="sunning-steppes">
-            <th scope="row">The Sunning Steppes</th>
-            <td>Warm golden grassland for the dawn hunt and the sacred afternoon nap.</td>
-            <td>Never wake a napper. Find your own patch of sun.</td>
-          </tr>
-          <tr id="ember-forge">
-            <th scope="row">The Ember Forge</th>
-            <td>The smithy district. Our library is our weapons, and the stories told about each one.</td>
-            <td>Ask any blade’s name and you will hear its whole history.</td>
-          </tr>
-          <tr id="fishgate-docks">
-            <th scope="row">Fishgate Docks</th>
-            <td>The river market on the Fang River. The busiest place in the city at dawn.</td>
-            <td>Arrive before sunrise for the best trout.</td>
-          </tr>
-          <tr id="featherwall">
-            <th scope="row">The Featherwall</th>
-            <td>The neutral border with Aviaria, where Nekoro and Avianis meet to play the Great Game instead of going to war.</td>
-            <td>Win loudly, lose honestly, and shake the Feathered by the wingtip after.</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+    <!-- each description stays hidden until its place is chosen (CSS :target) -->
+    <div class="places">
+      <section class="place" id="sunthrone" aria-labelledby="sunthrone-heading">
+        <h2 id="sunthrone-heading">The Sunthrone</h2>
+        <p>The great hall of the King, carved into a cliff of red rock. Petitions are heard at noon, judgements at dusk.</p>
+        <p><strong>Visitor's tip:</strong> Bow to the throne, not the king. He prefers it that way.</p>
+      </section>
 
-    <section class="section" aria-labelledby="video-heading">
-      <h2 id="video-heading" class="section-title">Training in the Proving Ring</h2>
-      <figure class="video-figure">
-        <video controls preload="metadata" width="1280" height="720" poster="video/proving-ring-poster.webp">
-          <source src="video/proving-ring.webm" type="video/webm">
-          <source src="video/proving-ring.mp4" type="video/mp4">
-          <track kind="captions" src="video/proving-ring-captions.vtt" srclang="en" label="English" default>
-          <p>Your browser can't play this video. <a href="video/proving-ring.mp4">Download the MP4</a> instead.</p>
-        </video>
-        <figcaption>Two young recruits spar on the sand. No sound. (Placeholder animation; a real clip is on its way.)</figcaption>
-      </figure>
-    </section>
+      <section class="place" id="proving-ring" aria-labelledby="proving-ring-heading">
+        <h2 id="proving-ring-heading">The Proving Ring</h2>
+        <p>A sand arena at the heart of the city. Duels, trials of rank and the loudest festivals in the land.</p>
+        <p><strong>Visitor's tip:</strong> Watchers cheer for both fighters. Booing a loser is the only real foul.</p>
+      </section>
 
-    <section class="section" aria-labelledby="highlights-heading">
-      <h2 id="highlights-heading" class="section-title">Do Not Miss</h2>
-      <div class="highlights">
-        <section class="highlight" aria-labelledby="hl-ring">
-          <h3 id="hl-ring">The Proving Ring</h3>
-          <p>Every quarrel in the city ends here, one way or another. King Rhazan won his crown on this sand, and any Nekoro may challenge for rank on festival days. Visitors may challenge too. Visitors usually lose. Everyone still goes to the feast.</p>
-        </section>
-        <section class="highlight" aria-labelledby="hl-hall">
-          <h3 id="hl-hall">Hearthfire Hall</h3>
-          <p>The fires here have not gone out in three hundred years. Guests eat first, champions eat second, and the king eats whenever Grom the smith lets him through the door.</p>
-        </section>
-        <section class="highlight" aria-labelledby="hl-steppes">
-          <h3 id="hl-steppes">The Sunning Steppes</h3>
-          <p>Golden grass to the horizon. We hunt here at dawn and sleep here all afternoon. Interrupting a sun-nap is the rudest thing a guest can do, so tread softly.</p>
-        </section>
-        <section class="highlight" aria-labelledby="hl-wall">
-          <h3 id="hl-wall">The Featherwall</h3>
-          <p>Our border with Aviaria. The Avianis hid in their sky-city for generations; now they come down to play the Great Game with us on neutral stone. They are cunning players. We are louder ones. <a href="https://tobiasvyseri.com/Aviaria/avianchess.html">Try a game yourself<span class="visually-hidden"> (external site)</span></a>.</p>
-        </section>
-      </div>
-    </section>
+      <section class="place" id="sun-shrine" aria-labelledby="sun-shrine-heading">
+        <h2 id="sun-shrine-heading">The Shrine of the Sun-Eye</h2>
+        <p>The High Seer's temple: a stone spire capped in gold that catches the first light.</p>
+        <p><strong>Visitor's tip:</strong> Come at dawn. Ask one question. Expect a riddle back.</p>
+      </section>
+
+      <section class="place" id="hearthfire-hall" aria-labelledby="hearthfire-hall-heading">
+        <h2 id="hearthfire-hall-heading">Hearthfire Hall</h2>
+        <p>The feast hall that never closes. Guests eat first, always.</p>
+        <p><strong>Visitor's tip:</strong> Claws sheathed at the hearth. Arguments wait until the plates are empty.</p>
+      </section>
+
+      <section class="place" id="kittenfold" aria-labelledby="kittenfold-heading">
+        <h2 id="kittenfold-heading">The Kittenfold</h2>
+        <p>Where young Nekoro are raised together and taught to climb, spar and boast properly.</p>
+        <p><strong>Visitor's tip:</strong> Visitors are welcome. Expect to be climbed.</p>
+      </section>
+
+      <section class="place" id="scratchstone-cliffs" aria-labelledby="scratchstone-cliffs-heading">
+        <h2 id="scratchstone-cliffs-heading">Scratchstone Cliffs</h2>
+        <p>Claw-scarred climbing cliffs where warriors train their grip and nerve.</p>
+        <p><strong>Visitor's tip:</strong> Add your own mark low on the rock. The high marks belong to champions.</p>
+      </section>
+
+      <section class="place" id="sunning-steppes" aria-labelledby="sunning-steppes-heading">
+        <h2 id="sunning-steppes-heading">The Sunning Steppes</h2>
+        <p>Warm golden grassland for the dawn hunt and the sacred afternoon nap.</p>
+        <p><strong>Visitor's tip:</strong> Never wake a napper. Find your own patch of sun.</p>
+      </section>
+
+      <section class="place" id="ember-forge" aria-labelledby="ember-forge-heading">
+        <h2 id="ember-forge-heading">The Ember Forge</h2>
+        <p>The smithy district. Our library is our weapons, and the stories told about each one.</p>
+        <p><strong>Visitor's tip:</strong> Ask any blade’s name and you will hear its whole history.</p>
+      </section>
+
+      <section class="place" id="fishgate-docks" aria-labelledby="fishgate-docks-heading">
+        <h2 id="fishgate-docks-heading">Fishgate Docks</h2>
+        <p>The river market on the Fang River. The busiest place in the city at dawn.</p>
+        <p><strong>Visitor's tip:</strong> Arrive before sunrise for the best trout.</p>
+      </section>
+
+      <section class="place" id="featherwall" aria-labelledby="featherwall-heading">
+        <h2 id="featherwall-heading">The Featherwall</h2>
+        <p>The neutral border with Aviaria, where Nekoro and Avianis meet to play the Great Game instead of going to war.</p>
+        <p><strong>Visitor's tip:</strong> Win loudly, lose honestly, and shake the Feathered by the wingtip after.</p>
+      </section>
+    </div>
   </main>
 
   <footer class="site-footer">
