@@ -241,23 +241,23 @@ a:hover {
   }
 }
 
-/* the runner: images/hero-runner.png is one strip of 8 frames side by side.
+/* the runner: images/hero-runner.png is one strip of 5 frames side by side.
    She runs on the spot, facing left, while the rocks scroll right behind her.
    background-image (not a mask) so she still shows on file:// pages */
 .hero-runner {
   position: absolute;
   right: 6%;
   bottom: calc(var(--fang-h) + 0.5rem);
-  height: 45%;
-  aspect-ratio: 450 / 306; /* one frame */
-  background: url("../images/hero-runner.png") 0 0 / 800% 100% no-repeat; /* silhouette in --clr-red-dark */
-  animation: hero-run 0.8s steps(8) infinite;
+  height: 55%;
+  aspect-ratio: 318 / 383; /* one frame */
+  background: url("../images/hero-runner.png") 0 0 / 500% 100% no-repeat; /* silhouette in --clr-red-dark */
+  animation: hero-run 0.55s steps(5) infinite;
 }
 
-/* frame n sits at n/7 of the way along, so 8 steps end at 800/7 % */
+/* frame n sits at n/4 of the way along, so 5 steps end at 500/4 % = 125% */
 @keyframes hero-run {
   to {
-    background-position: 114.2857% 0;
+    background-position: 125% 0;
   }
 }
 
