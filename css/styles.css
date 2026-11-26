@@ -825,7 +825,7 @@ textarea:focus-visible {
 }
 
 .button:hover {
-  background-color: var(--clr-ink);
+  background-color: var(--clr-flame);
 }
 
 .button:focus-visible {
