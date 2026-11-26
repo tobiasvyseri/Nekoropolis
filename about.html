@@ -52,27 +52,25 @@
     </section>
 
     <section class="section" aria-labelledby="contact-heading">
-      <h2 id="contact-heading" class="section-title">Send Word to the Nekoropolis</h2>
+      <h2 id="contact-heading" class="section-title title-large">Send Word to the Nekoropolis</h2>
+      <hr class="divider">
       <form class="contact-form" action="https://formspree.io/f/FORMSPREE_ID" method="post">
-        <fieldset>
-          <legend>Your message</legend>
-          <input type="hidden" name="_subject" value="Nekoropolis website message">
-          <div class="form-row">
-            <label for="name">Name <span class="required" aria-hidden="true">*</span></label>
-            <input id="name" name="name" type="text" autocomplete="name" required>
-          </div>
-          <div class="form-row">
-            <label for="email">Email <span class="required" aria-hidden="true">*</span></label>
-            <input id="email" name="email" type="email" autocomplete="email" required>
-          </div>
-          <div class="form-row">
-            <label for="message">Message <span class="required" aria-hidden="true">*</span></label>
-            <textarea id="message" name="message" rows="6" required></textarea>
-          </div>
-          <div class="form-actions">
-            <span class="button-frame"><button class="button" type="submit">Send Word</button></span>
-          </div>
-        </fieldset>
+        <input type="hidden" name="_subject" value="Nekoropolis website message">
+        <div class="form-row">
+          <label for="name">Name <span class="required" aria-hidden="true">*</span></label>
+          <input id="name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="form-row">
+          <label for="email">Email <span class="required" aria-hidden="true">*</span></label>
+          <input id="email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="form-row">
+          <label for="message">Message <span class="required" aria-hidden="true">*</span></label>
+          <textarea id="message" name="message" rows="6" required></textarea>
+        </div>
+        <div class="form-actions">
+          <span class="button-frame"><button class="button" type="submit">Send Word</button></span>
+        </div>
       </form>
     </section>
   </main>

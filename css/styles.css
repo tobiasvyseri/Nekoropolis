@@ -300,6 +300,11 @@ main > * {
   text-align: center;
 }
 
+/* an h2 that should look as big as the page's h1 */
+.title-large {
+  font-size: var(--fs-h1);
+}
+
 /* footer */
 .site-footer {
   position: relative;
