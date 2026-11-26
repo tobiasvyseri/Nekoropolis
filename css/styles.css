@@ -33,9 +33,9 @@
   /* type scale */
   --fs-body: 1rem;
   --fs-small: 0.9375rem;
-  --fs-h1: clamp(1.5rem, 1.25rem + 1.2vw, 2rem);
-  --fs-h2: clamp(1.25rem, 1.1rem + 0.7vw, 1.5rem);
-  --fs-h3: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+  --fs-h1: clamp(1.25rem, 1.1rem + 0.8vw, 1.625rem);
+  --fs-h2: clamp(1.125rem, 1rem + 0.5vw, 1.3125rem);
+  --fs-h3: clamp(1rem, 0.95rem + 0.2vw, 1.0625rem);
   --fs-nav: 1rem;
 
   /* spacing */
@@ -321,8 +321,9 @@ main > * {
 .site-footer {
   position: relative;
   z-index: 2; /* above main, so the teeth bite into the content column */
-  background-color: var(--clr-coal);
+  background-color: var(--clr-night);
   color: var(--clr-bone);
+  font-size: var(--fs-small);
   text-align: center;
   padding: var(--space-xl) var(--gutter) var(--space-l);
 }
@@ -353,13 +354,14 @@ main > * {
   justify-content: center;
 }
 
-.footer-links li + li {
-  border-left: 1px solid var(--clr-gold-deep);
+.footer-links li + li::before {
+  content: "|";
+  color: var(--clr-gold-deep);
 }
 
 .copyright {
   margin: 0 auto;
-  font-size: var(--fs-small);
+  font-size: 0.8125rem;
 }
 
 /* --------------------------------------------------------------------------
@@ -500,7 +502,7 @@ main > * {
 }
 
 .site-footer::after {
-  background-color: var(--clr-coal);
+  background-color: var(--clr-night);
 }
 
 /* 5.3 divider ---------------------------------------------------------- */
