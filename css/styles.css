@@ -33,9 +33,9 @@
   /* type scale */
   --fs-body: 1rem;
   --fs-small: 0.9375rem;
-  --fs-h1: clamp(1.25rem, 1.1rem + 0.8vw, 1.625rem);
-  --fs-h2: clamp(1.125rem, 1rem + 0.5vw, 1.3125rem);
-  --fs-h3: clamp(1rem, 0.95rem + 0.2vw, 1.0625rem);
+  --fs-h1: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  --fs-h2: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
+  --fs-h3: 1rem;
   --fs-nav: 1rem;
 
   /* spacing */
@@ -491,9 +491,9 @@ main > * {
 /* 5.3 divider ---------------------------------------------------------- */
 .divider {
   border: 0;
-  width: min(14rem, 70%);
+  width: min(28rem, 90%);
   height: auto;
-  aspect-ratio: 1143 / 431; /* the traced claw-mark image */
+  aspect-ratio: 1844 / 230; /* the traced claw-mark image */
   margin: var(--space-s) auto var(--space-l);
   background: url("../images/divider-claw.svg") center / contain no-repeat;
 }
