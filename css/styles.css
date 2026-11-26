@@ -824,9 +824,9 @@ textarea:focus-visible {
   align-items: center;
   min-height: 2.75rem;
   padding: var(--space-s) var(--space-xl);
-  font-family: var(--ff-display);
+  font-family: var(--ff-headline);
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 400; /* Scratchies has one weight */
   color: var(--clr-bone);
   background-color: var(--clr-blood);
   border: 0;
