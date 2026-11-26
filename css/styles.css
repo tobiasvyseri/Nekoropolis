@@ -49,6 +49,7 @@
   --fang-h: 1rem;
   --focus-width: 3px;
   --hexagon: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  --hexagon-zoomed: polygon(50% 5.36%, 94.64% 27.68%, 94.64% 72.32%, 50% 94.64%, 5.36% 72.32%, 5.36% 27.68%); /* --hexagon scaled by 1/1.12 around the centre */
   --notch: polygon(0.75rem 0, calc(100% - 0.75rem) 0, 100% 0.75rem, 100% calc(100% - 0.75rem), calc(100% - 0.75rem) 100%, 0.75rem 100%, 0 calc(100% - 0.75rem), 0 0.75rem);
   --content-max: 64rem;
   --measure: 70ch;
@@ -493,27 +494,27 @@ main > * {
 .portrait-grid {
   list-style: none;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* an odd one out sits in the middle, not on the left */
   gap: var(--space-l) var(--space-m);
-  max-width: 44rem;
+  max-width: 56rem;
+}
+
+.portrait-grid li {
+  flex: 0 0 min(9.5rem, 42%);
 }
 
 .portrait-link {
   display: block;
-  text-align: center;
-  text-decoration: none;
-  color: var(--clr-ink);
-  border-radius: 0.25rem;
-  transition: filter 0.2s ease, transform 0.2s ease;
 }
 
 .portrait-frame {
   display: block;
-  padding: 0.25rem;
+  padding: 0.3rem;
   background-color: var(--clr-gold-deep);
   clip-path: var(--hexagon);
-  transition: background-color 0.2s ease;
+  transition: background-color 0.25s ease;
 }
 
 .portrait-frame img {
@@ -521,41 +522,48 @@ main > * {
   aspect-ratio: 1;
   object-fit: cover;
   clip-path: var(--hexagon);
+  background-color: var(--clr-bone-shade); /* shows through the transparent art */
+  transition: transform 0.3s ease, clip-path 0.3s ease, background-color 0.25s ease;
 }
 
-.portrait-name {
-  display: block;
-  margin-top: var(--space-s);
-  font-weight: 700;
-}
-
-.portrait-link:hover,
-.portrait-link:focus-visible {
-  transform: translateY(-0.2rem);
-  filter: drop-shadow(0 0 0.35rem var(--clr-gold));
-  color: var(--clr-blood);
-}
-
+/* the border lights up, and the inside of the hexagon turns the same gold */
 .portrait-link:hover .portrait-frame,
-.portrait-link:focus-visible .portrait-frame {
+.portrait-link:focus-visible .portrait-frame,
+.portrait-link:hover .portrait-frame img,
+.portrait-link:focus-visible .portrait-frame img {
   background-color: var(--clr-gold);
 }
 
+.portrait-link:focus-visible {
+  outline-offset: 0.25rem;
+}
+
+/* zoom: the picture grows, but its hexagon shrinks by the same amount (1 / 1.12),
+   so the face zooms in while the gold border stays put (same trick as Aviaria's circles) */
+.portrait-link:hover .portrait-frame img,
+.portrait-link:focus-visible .portrait-frame img {
+  transform: scale(1.12);
+  clip-path: var(--hexagon-zoomed);
+}
+
 /* 5.6 profiles --------------------------------------------------------- */
+/* like the Aviaria denizens page: profiles are hidden until their portrait is
+   chosen, then only that one shows (the link changes the URL to #name = :target) */
 .profile {
-  display: grid;
+  display: none;
   grid-template-columns: minmax(0, 1fr);
   grid-template-areas:
     "name"
     "image"
     "stats"
-    "quote"
-    "back";
+    "quote";
   gap: var(--space-m);
   max-width: 54rem;
   margin: 0 auto var(--space-xxl);
-  padding-top: var(--space-l);
-  border-top: 2px solid var(--clr-gold-deep);
+}
+
+.profile:target {
+  display: grid;
 }
 
 .profile h2 {
@@ -567,11 +575,7 @@ main > * {
 .profile-image {
   grid-area: image;
   margin: 0 auto;
-  max-width: 22rem;
-}
-
-.profile-image img {
-  border: 0.25rem solid var(--clr-gold-deep);
+  max-width: 18rem;
 }
 
 .stats {
@@ -580,8 +584,7 @@ main > * {
 }
 
 .stats div {
-  padding: var(--space-xs) 0 var(--space-s);
-  border-bottom: 1px dashed var(--clr-gold-deep);
+  padding: var(--space-xs) 0;
 }
 
 .stats dt {
@@ -599,26 +602,18 @@ main > * {
   margin: 0 0 0 0.25em;
 }
 
+/* the quote reads as one more line under the stats, no box */
 .quote {
   grid-area: quote;
   margin: 0;
-  padding: var(--space-m) var(--space-l);
-  background-color: var(--clr-bone-shade);
-  border-left: 0.375rem solid var(--clr-blood);
 }
 
 .quote blockquote {
-  margin: 0 0 var(--space-s);
+  margin: 0 0 var(--space-xs);
   font-style: italic;
-  font-size: 1.0625rem;
 }
 
 .quote blockquote p {
-  margin: 0;
-}
-
-.back-link {
-  grid-area: back;
   margin: 0;
 }
 
@@ -944,28 +939,43 @@ textarea:focus-visible {
     width: clamp(14rem, 28vw, 24rem);
   }
 
-  .portrait-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+  .portrait-grid li {
+    flex-basis: 9.5rem;
   }
 
+  /* name across the top, picture left; stats and then the quote on the right,
+     sitting together in the middle of the picture's height */
   .profile {
-    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-    grid-template-rows: auto 1fr auto auto;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto 1fr 1fr;
     grid-template-areas:
-      "image name"
+      "name name"
       "image stats"
-      "quote quote"
-      "back back";
+      "image quote";
     column-gap: var(--space-xl);
   }
 
-  .profile h2 {
-    text-align: left;
-    align-self: end;
+  .profile-image {
+    grid-row: 2 / 4;
   }
 
   .profile-image {
+    justify-self: end;
+    margin: 0;
     max-width: none;
+  }
+
+  .profile-image img {
+    height: 30rem;
+    width: auto;
+  }
+
+  .stats {
+    align-self: end;
+  }
+
+  .quote {
+    align-self: start;
   }
 
   .highlights {
@@ -1095,13 +1105,8 @@ textarea:focus-visible {
   }
 
   .has-menu-js .site-nav,
-  .portrait-link,
-  .portrait-frame {
+  .portrait-frame,
+  .portrait-frame img {
     transition: none;
-  }
-
-  .portrait-link:hover,
-  .portrait-link:focus-visible {
-    transform: none;
   }
 }
