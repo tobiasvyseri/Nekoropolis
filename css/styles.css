@@ -52,6 +52,7 @@
   --hexagon-zoomed: polygon(50% 5.36%, 94.64% 27.68%, 94.64% 72.32%, 50% 94.64%, 5.36% 72.32%, 5.36% 27.68%); /* --hexagon scaled by 1/1.12 around the centre */
   --notch: polygon(0.75rem 0, calc(100% - 0.75rem) 0, 100% 0.75rem, 100% calc(100% - 0.75rem), calc(100% - 0.75rem) 100%, 0.75rem 100%, 0 calc(100% - 0.75rem), 0 0.75rem);
   --content-max: 64rem;
+  --strip-w: 2rem; /* diamond strips beside the content column (wide screens) */
   --measure: 70ch;
 }
 
@@ -121,7 +122,12 @@ h3 {
   font-weight: 700;
   line-height: 1.15;
   color: var(--clr-blood);
-  text-shadow: 0 0.06em 0 rgba(30, 20, 18, 0.25);
+  /* thin gold outline (one 1px copy in each direction), like Aviaria's headings */
+  text-shadow:
+    1px 1px 0 var(--clr-gold),
+    -1px 1px 0 var(--clr-gold),
+    1px -1px 0 var(--clr-gold),
+    -1px -1px 0 var(--clr-gold);
   margin: 0 0 var(--space-m);
 }
 
@@ -966,6 +972,29 @@ textarea:focus-visible {
     margin: 0 auto;
     padding-left: var(--space-xxl);
     padding-right: var(--space-xxl);
+  }
+
+  /* diamond strips down both sides of the content column, in the style of the
+     pennant edges; they tuck under the hero and footer spikes */
+  main::before,
+  main::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: var(--strip-w);
+    background-color: var(--clr-night);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%238e1b1b' d='M12 2 22 12 12 22 2 12Z'/%3E%3C/svg%3E");
+    background-size: var(--strip-w) var(--strip-w);
+    background-repeat: repeat-y;
+  }
+
+  main::before {
+    right: 100%;
+  }
+
+  main::after {
+    left: 100%;
   }
 }
 
