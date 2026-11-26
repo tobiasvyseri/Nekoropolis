@@ -16,6 +16,7 @@
   --clr-dusk: #3a1210; /* hero sky */
   --clr-blood: #8e1b1b;
   --clr-ember: #c0392b; /* decorative only, never text */
+  --clr-flame: #e04a3a; /* menu hover / current page on the dark bars (4.7:1 on night) */
   --clr-gold: #d4a437;
   --clr-gold-deep: #7a5710;
   --clr-bone: #f3e9d2;
@@ -24,6 +25,7 @@
   --clr-field: #fffaf0;
 
   /* fonts */
+  --ff-headline: "Scratchies", "Grenze Gotisch", Georgia, serif;
   --ff-display: "Grenze Gotisch", "Palatino Linotype", Georgia, serif;
   --ff-body: "Raleway", "Segoe UI", Arial, sans-serif;
 
@@ -52,13 +54,21 @@
   --hexagon-zoomed: polygon(50% 5.36%, 94.64% 27.68%, 94.64% 72.32%, 50% 94.64%, 5.36% 72.32%, 5.36% 27.68%); /* --hexagon scaled by 1/1.12 around the centre */
   --notch: polygon(0.75rem 0, calc(100% - 0.75rem) 0, 100% 0.75rem, 100% calc(100% - 0.75rem), calc(100% - 0.75rem) 100%, 0.75rem 100%, 0 calc(100% - 0.75rem), 0 0.75rem);
   --content-max: 64rem;
-  --strip-w: 2rem; /* diamond strips beside the content column (wide screens) */
+  --strip-w: 1.25rem; /* diamond strips beside the content column (wide screens) */
   --measure: 70ch;
 }
 
 /* --------------------------------------------------------------------------
-   2. @font-face (self-hosted, SIL OFL 1.1)
+   2. @font-face (self-hosted; Grenze Gotisch and Raleway are SIL OFL 1.1)
    -------------------------------------------------------------------------- */
+@font-face {
+  font-family: "Scratchies"; /* Darrell Flood; converted from TTF */
+  src: url("../fonts/scratchies.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @font-face {
   font-family: "Grenze Gotisch";
   src: url("../fonts/grenze-gotisch-latin-wght.woff2") format("woff2");
@@ -103,7 +113,7 @@ body {
   line-height: 1.6;
   color: var(--clr-ink);
   background: var(--clr-wine) url("../images/bg-tracks.svg") repeat;
-  background-size: 15rem 15rem;
+  background-size: 30rem 30rem;
   overflow-x: hidden;
 }
 
@@ -118,16 +128,10 @@ svg {
 h1,
 h2,
 h3 {
-  font-family: var(--ff-display);
-  font-weight: 700;
+  font-family: var(--ff-headline);
+  font-weight: 400; /* Scratchies has one weight; stops the browser faking bold */
   line-height: 1.15;
   color: var(--clr-blood);
-  /* thin gold outline (one 1px copy in each direction), like Aviaria's headings */
-  text-shadow:
-    1px 1px 0 var(--clr-gold),
-    -1px 1px 0 var(--clr-gold),
-    1px -1px 0 var(--clr-gold),
-    -1px -1px 0 var(--clr-gold);
   margin: 0 0 var(--space-m);
 }
 
@@ -296,7 +300,7 @@ main > * {
 }
 
 .site-footer a {
-  color: var(--clr-gold);
+  color: var(--clr-bone);
   display: inline-flex;
   align-items: center;
   min-height: 2.75rem;
@@ -304,7 +308,7 @@ main > * {
 }
 
 .site-footer a:hover {
-  color: var(--clr-bone);
+  color: var(--clr-flame);
 }
 
 .site-footer :focus-visible {
@@ -384,13 +388,13 @@ main > * {
   font-family: var(--ff-display);
   font-weight: 600;
   font-size: var(--fs-nav);
-  color: var(--clr-gold);
+  color: var(--clr-bone);
   text-decoration: none;
 }
 
 .nav-list a:hover,
 .nav-list a[aria-current="page"] {
-  color: var(--clr-bone);
+  color: var(--clr-flame);
 }
 
 /* collapsible panel: only when menu.js is running (adds .has-menu-js) */
@@ -995,7 +999,7 @@ textarea:focus-visible {
     bottom: 0;
     width: var(--strip-w);
     background-color: var(--clr-night);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%238e1b1b' d='M12 2 22 12 12 22 2 12Z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%238e1b1b' d='M12 5 19 12 12 19 5 12Z'/%3E%3C/svg%3E");
     background-size: var(--strip-w) var(--strip-w);
     background-repeat: repeat-y;
   }
