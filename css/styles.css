@@ -12,9 +12,9 @@
   /* colours (text pairs: see plan.md 6.1, approved pairs only) */
   --clr-night: #140d0b;
   --clr-coal: #2a1a16;
-  --clr-wine: #4a1512; /* page background behind the content column */
+  --clr-wine: #6c0b22; /* page background behind the content column: the logo red */
   --clr-dusk: #3a1210; /* hero sky */
-  --clr-blood: #8e1b1b;
+  --clr-blood: #6c0b22; /* the logo red: all text on bone, and the page background */
   --clr-ember: #c0392b; /* decorative only, never text */
   --clr-flame: #e04a3a; /* menu hover / current page on the dark bars (4.7:1 on night) */
   --clr-gold: #d4a437;
@@ -32,10 +32,10 @@
   /* type scale */
   --fs-body: 1rem;
   --fs-small: 0.9375rem;
-  --fs-h1: clamp(2.25rem, 1.6rem + 3vw, 3.5rem);
-  --fs-h2: clamp(1.75rem, 1.4rem + 1.6vw, 2.5rem);
-  --fs-h3: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem);
-  --fs-nav: 1.375rem;
+  --fs-h1: clamp(1.75rem, 1.4rem + 1.8vw, 2.5rem);
+  --fs-h2: clamp(1.375rem, 1.2rem + 1vw, 1.875rem);
+  --fs-h3: clamp(1.125rem, 1.05rem + 0.5vw, 1.375rem);
+  --fs-nav: 1.125rem;
 
   /* spacing */
   --space-xs: 0.25rem;
@@ -111,7 +111,7 @@ body {
   font-family: var(--ff-body);
   font-size: var(--fs-body);
   line-height: 1.6;
-  color: var(--clr-ink);
+  color: var(--clr-blood);
   background: var(--clr-wine) url("../images/bg-tracks.svg") repeat;
   background-size: 30rem 30rem;
   overflow-x: hidden;
@@ -162,13 +162,14 @@ p {
 }
 
 a {
-  color: var(--clr-gold-deep);
-  text-decoration: none;
+  color: var(--clr-blood);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
   font-weight: 600;
 }
 
 a:hover {
-  color: var(--clr-blood);
+  color: var(--clr-gold-deep);
 }
 
 :focus-visible {
@@ -248,9 +249,35 @@ a:hover {
 @keyframes hero-scroll {
   to {
     background-position:
-      calc(var(--tile-w) * -3) 100%,
-      calc(var(--tile-w) * -2) 100%,
-      calc(var(--tile-w) * -1) 100%;
+      calc(var(--tile-w) * 3) 100%,
+      calc(var(--tile-w) * 2) 100%,
+      calc(var(--tile-w) * 1) 100%;
+  }
+}
+
+/* the runner: images/hero-runner.png is one strip of 8 frames side by side.
+   She runs on the spot, facing left, while the rocks scroll right behind her.
+   background-image (not a mask) so she still shows on file:// pages */
+.hero-runner {
+  position: absolute;
+  right: 6%;
+  bottom: calc(var(--fang-h) + 0.5rem);
+  height: 45%;
+  aspect-ratio: 450 / 306; /* one frame */
+  background: url("../images/hero-runner.png") 0 0 / 800% 100% no-repeat;
+  /* same thin gold outline as the logo */
+  filter:
+    drop-shadow(1px 0 0 var(--clr-gold))
+    drop-shadow(-1px 0 0 var(--clr-gold))
+    drop-shadow(0 1px 0 var(--clr-gold))
+    drop-shadow(0 -1px 0 var(--clr-gold));
+  animation: hero-run 0.8s steps(8) infinite;
+}
+
+/* frame n sits at n/7 of the way along, so 8 steps end at 800/7 % */
+@keyframes hero-run {
+  to {
+    background-position: 114.2857% 0;
   }
 }
 
@@ -301,6 +328,7 @@ main > * {
 
 .site-footer a {
   color: var(--clr-bone);
+  text-decoration: none;
   display: inline-flex;
   align-items: center;
   min-height: 2.75rem;
@@ -385,8 +413,8 @@ main > * {
   min-height: 2.75rem;
   min-width: 2.75rem;
   padding: 0 var(--space-s);
-  font-family: var(--ff-display);
-  font-weight: 600;
+  font-family: var(--ff-headline);
+  font-weight: 400; /* Scratchies has one weight */
   font-size: var(--fs-nav);
   color: var(--clr-bone);
   text-decoration: none;
@@ -764,7 +792,7 @@ textarea {
   min-height: 2.75rem;
   padding: var(--space-s) var(--space-m);
   font: inherit;
-  color: var(--clr-ink);
+  color: var(--clr-blood);
   background-color: var(--clr-field);
   /* no box: just a line underneath, so the field is still visible as a field */
   border: 0;
@@ -934,7 +962,7 @@ textarea:focus-visible {
 @media (min-width: 64em) {
   :root {
     --gutter: 3rem;
-    --fs-nav: 1.625rem;
+    --fs-nav: 1.3rem;
   }
 
   .header-bar {
@@ -999,7 +1027,7 @@ textarea:focus-visible {
     bottom: 0;
     width: var(--strip-w);
     background-color: var(--clr-night);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%238e1b1b' d='M12 5 19 12 12 19 5 12Z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%236c0b22' d='M12 0 24 12 12 24 0 12Z'/%3E%3C/svg%3E");
     background-size: var(--strip-w) var(--strip-w);
     background-repeat: repeat-y;
   }
@@ -1018,7 +1046,8 @@ textarea:focus-visible {
     scroll-behavior: auto;
   }
 
-  .hero {
+  .hero,
+  .hero-runner {
     animation: none;
   }
 
